@@ -21,7 +21,7 @@ linters:
 #    - lll
     - misspell
     - nakedret
-    - exportloopref
+    - copyloopvar
     - staticcheck
     - structcheck
 #    - typecheck
