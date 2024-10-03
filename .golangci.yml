@@ -28,4 +28,4 @@ linters:
     - unconvert
     - unparam
     - unused
-    - varcheck
+#    - varcheck
