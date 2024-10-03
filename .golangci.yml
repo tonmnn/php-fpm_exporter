@@ -23,7 +23,7 @@ linters:
     - nakedret
     - copyloopvar
     - staticcheck
-    - structcheck
+#    - structcheck
 #    - typecheck
     - unconvert
     - unparam
