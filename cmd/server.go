@@ -45,7 +45,7 @@ and usage of using your command. For example:
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
-	Run: func(cmd *cobra.Command, args []string) {
+	Run: func(_ *cobra.Command, _ []string) {
 		log.Infof("Starting server on %v with path %v", listeningAddress, metricsEndpoint)
 
 		pm := phpfpm.PoolManager{}
@@ -72,7 +72,7 @@ to quickly create a Cobra application.`,
 		}
 
 		http.Handle(metricsEndpoint, promhttp.Handler())
-		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
 			_, err := w.Write([]byte(`<html>
 			 <head><title>php-fpm_exporter</title></head>
 			 <body>

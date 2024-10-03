@@ -38,7 +38,7 @@ var getCmd = &cobra.Command{
 * php-fpm_exporter get --phpfpm.scrape-uri 127.0.0.1:9000 --phpfpm.scrape-uri 127.0.0.1:9001 [...]
 * php-fpm_exporter get --phpfpm.scrape-uri 127.0.0.1:9000,127.0.0.1:9001,[...]
 `,
-	Run: func(cmd *cobra.Command, args []string) {
+	Run: func(_ *cobra.Command, _ []string) {
 		pm := phpfpm.PoolManager{}
 
 		for _, uri := range scrapeURIs {
