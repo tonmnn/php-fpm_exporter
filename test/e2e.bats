@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
-load '/usr/local/lib/bats-support/load.bash'
-load '/usr/local/lib/bats-assert/load.bash'
+load '/home/linuxbrew/.linuxbrew/lib/bats-support/load.bash'
+load '/home/linuxbrew/.linuxbrew/lib/bats-assert/load.bash'
 
 setup () {
 	docker-compose -f ./test/docker-compose-e2e.yml up -d
