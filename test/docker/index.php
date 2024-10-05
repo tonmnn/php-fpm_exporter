@@ -1,6 +1,7 @@
 <?php
 
-switch ($_SERVER['REQUEST_URI']) {
+$path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+switch ($path) {
     // GET /sleep?duration=1
     case '/sleep':
         // Sleep for n seconds where the duration can be passed as query parameter "duration".
@@ -8,6 +9,6 @@ switch ($_SERVER['REQUEST_URI']) {
         $time = (int) ($_GET['duration'] ?? 1);
         sleep($time);
         break;
-    case default:
+    default:
         echo 'Hello World!';
 }
