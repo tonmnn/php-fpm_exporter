@@ -69,17 +69,25 @@ jobs:
 
     - name: Run GoReleaser
       uses: goreleaser/goreleaser-action@v6
+      id: build
       with:
         version: v2
         args: release --clean --snapshot
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Extract snapshot image name
+      id: extract
+      run: |
+        echo "SNAPSHOT_IMAGE_NAME=$(echo '${{ steps.build.outputs.artifacts }}' \
+        | jq '.[] | select(.goos=="linux" and .goarch=="amd64" and .type=="Docker Image") | .name' -r)" \
+        >> "$GITHUB_OUTPUT"
+
     - name: Scan image
       uses: anchore/scan-action@v5.2.0
       id: scan
       with:
-        image: "ghcr.io/tonmnn/php-fpm_exporter:0.0.0-amd64"
+        image: ${{ steps.extract.outputs.SNAPSHOT_IMAGE_NAME }}
         fail-build: false
 
     - name: Upload Anchore scan SARIF report
