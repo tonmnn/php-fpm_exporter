@@ -1,6 +1,9 @@
 name: Auto-Merge
-on:
-  pull_request_target
+on: pull_request
+
+permissions:
+  pull-requests: write
+  contents: write
 
 jobs:
   enable-auto-merge:
@@ -8,6 +11,8 @@ jobs:
 
     if: github.actor == 'dependabot[bot]'
     steps:
-    - uses: alexwilson/enable-github-automerge-action@main
-      with:
-        github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: "${{ secrets.GITHUB_TOKEN }}"
+          pull-request-number: ${{ github.event.pull_request.number }}
+          merge-method: squash
