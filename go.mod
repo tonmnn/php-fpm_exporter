@@ -49,3 +49,5 @@ require (
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
+
+replace github.com/tomasen/fcgi_client => github.com/kanocz/fcgi_client v0.0.0-20210113082628-fff85c8adfb7
