@@ -163,7 +163,10 @@ func (p *Pool) Update() (err error) {
 
 	defer fcgi.Close()
 
-	fcgi.SetTimeout(time.Duration(3) * time.Second)
+	err = fcgi.SetTimeout(time.Duration(3) * time.Second)
+	if err != nil {
+		return p.error(err)
+	}
 
 	env := map[string]string{
 		"SCRIPT_FILENAME": path,
