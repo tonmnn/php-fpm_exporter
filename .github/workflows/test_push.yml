@@ -34,14 +34,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - name: Checkout
+      uses: actions/checkout@v4
+
     - name: Setup Go
       uses: actions/setup-go@v5.3.0
       with:
         go-version-file: './go.mod'
       id: go
-
-    - name: Checkout
-      uses: actions/checkout@v4
 
     - name: Test
       run: go test -coverprofile cover.out ./...
