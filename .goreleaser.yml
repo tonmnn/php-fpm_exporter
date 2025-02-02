@@ -57,6 +57,6 @@ changelog:
 
 archives:
   - id: default
-    format: binary
+    formats: ['binary']
   - id: targz
-    format: tar.gz
+    formats: ['tar.gz']
