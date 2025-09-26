@@ -84,7 +84,7 @@ jobs:
         >> "$GITHUB_OUTPUT"
 
     - name: Scan image
-      uses: anchore/scan-action@v6.5.0
+      uses: anchore/scan-action@v7.0.0
       id: scan
       with:
         image: ${{ steps.extract.outputs.SNAPSHOT_IMAGE_NAME }}
