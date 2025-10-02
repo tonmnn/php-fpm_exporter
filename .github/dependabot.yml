@@ -5,15 +5,24 @@ updates:
     target-branch: "master"
     schedule:
       interval: "monthly"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
 
   - package-ecosystem: "docker"
     directory: "/"
     target-branch: "master"
     schedule:
       interval: "daily"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
 
   - package-ecosystem: "gomod"
     directory: "/"
     target-branch: "master"
     schedule:
       interval: "monthly"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
