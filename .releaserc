@@ -1,7 +1,0 @@
----
-repositoryUrl: https://github.com/tonmnn/php-fpm_exporter
-verifyConditions: ['@semantic-release/github']
-prepare: []
-publish: ['@semantic-release/github']
-success: ['@semantic-release/github']
-fail: ['@semantic-release/github']

@@ -1,0 +1,23 @@
+repositoryUrl: https://github.com/tonmnn/php-fpm_exporter
+branches:
+  - master
+
+plugins:
+  -
+    - "@semantic-release/commit-analyzer"
+    - preset: conventionalcommits
+      releaseRules:
+        - type: ci
+          release: false
+        - type: chore
+          scope: deps
+          release: patch
+        - type: chore
+          scope: dev-deps
+          release: patch
+      parserOpts:
+        noteKeywords:
+          - BREAKING CHANGE
+          - BREAKING CHANGES
+  - "@semantic-release/release-notes-generator"
+  - "@semantic-release/github"
