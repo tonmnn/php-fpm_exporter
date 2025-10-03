@@ -11,44 +11,26 @@ builds:
       - amd64
       - arm64
 
-dockers:
-  - use: buildx
-    goos: linux
-    goarch: amd64
-    image_templates:
-      - "ghcr.io/tonmnn/php-fpm_exporter:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-amd64"
-    build_flag_templates:
-      - "--platform=linux/amd64"
-      - "--build-arg=VERSION={{.Version}}"
-      - "--build-arg=BUILD_DATE={{.Date}}"
-      - "--build-arg=VCS_REF={{.FullCommit}}"
-  - use: buildx
-    goos: linux
-    goarch: arm64
-    image_templates:
-      - "ghcr.io/tonmnn/php-fpm_exporter:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-arm64"
-    build_flag_templates:
-      - "--platform=linux/arm64/v8"
-      - "--build-arg=VERSION={{.Version}}"
-      - "--build-arg=BUILD_DATE={{.Date}}"
-      - "--build-arg=VCS_REF={{.FullCommit}}"
-docker_manifests:
-  - name_template: "ghcr.io/tonmnn/php-fpm_exporter:latest"
-    image_templates:
-      - "ghcr.io/tonmnn/php-fpm_exporter:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-amd64"
-      - "ghcr.io/tonmnn/php-fpm_exporter:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-arm64"
-  - name_template: "ghcr.io/tonmnn/php-fpm_exporter:{{ .Major }}.{{ .Minor }}.{{ .Patch }}"
-    image_templates:
-      - "ghcr.io/tonmnn/php-fpm_exporter:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-amd64"
-      - "ghcr.io/tonmnn/php-fpm_exporter:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-arm64"
-  - name_template: "ghcr.io/tonmnn/php-fpm_exporter:{{ .Major }}.{{ .Minor }}"
-    image_templates:
-      - "ghcr.io/tonmnn/php-fpm_exporter:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-amd64"
-      - "ghcr.io/tonmnn/php-fpm_exporter:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-arm64"
-  - name_template: "ghcr.io/tonmnn/php-fpm_exporter:{{ .Major }}"
-    image_templates:
-      - "ghcr.io/tonmnn/php-fpm_exporter:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-amd64"
-      - "ghcr.io/tonmnn/php-fpm_exporter:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-arm64"
+dockers_v2:
+  - images:
+        - ghcr.io/tonmnn/php-fpm_exporter
+    tags:
+        - "{{ if not .IsNightly }}latest{{ end }}"
+        - "{{ .Major }}.{{ .Minor }}.{{ .Patch }}"
+        - "{{ .Major }}.{{ .Minor }}"
+        - "{{ .Major }}"
+    platforms:
+      - linux/amd64
+      - linux/arm64
+    labels:
+      "org.opencontainers.image.created": "{{.Date}}"
+      "org.opencontainers.image.title": "{{.ProjectName}}"
+      "org.opencontainers.image.revision": "{{.FullCommit}}"
+      "org.opencontainers.image.version": "{{.Version}}"
+      "org.opencontainers.image.source": "{{.GitURL}}"
+      "org.opencontainers.image.description": "A prometheus exporter for PHP-FPM."
+      "org.opencontainers.image.url": "https://github.com/tonmnn/php-fpm_exporter"
+      "org.opencontainers.image.vendor": "tonmnn"
 
 changelog:
   filters:
