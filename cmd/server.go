@@ -15,6 +15,7 @@ package cmd
 
 import (
 	"context"
+	"errors"
 	"net/http"
 	"os"
 	"os/signal"
@@ -96,8 +97,9 @@ to quickly create a Cobra application.`,
 
 		// Run our server in a goroutine so that it doesn't block.
 		go func() {
-			if err := srv.ListenAndServe(); err != nil {
-				log.Error(err)
+			err := srv.ListenAndServe()
+			if !errors.Is(err, http.ErrServerClosed) {
+				log.Fatal(err)
 			}
 		}()
 
