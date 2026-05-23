@@ -1,6 +1,6 @@
 module github.com/hipages/php-fpm_exporter
 
-go 1.26
+go 1.26.3
 
 require (
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc
