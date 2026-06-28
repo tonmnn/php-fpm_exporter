@@ -256,8 +256,9 @@ func parseURL(rawurl string) (scheme string, address string, path string, err er
 
 	scheme = uri.Scheme
 
+	const unix = "unix"
 	switch uri.Scheme {
-	case "unix":
+	case unix:
 		result := strings.Split(uri.Path, ";")
 		address = result[0]
 		if len(result) > 1 {
